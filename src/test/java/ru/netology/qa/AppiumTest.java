@@ -6,8 +6,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import ru.netology.qa.screens.MainScreen;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -31,10 +31,9 @@ public class AppiumTest {
     public void setUp() {
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.setCapability("platformName", "Android");
-        desiredCapabilities.setCapability("platformName", "Android");
         desiredCapabilities.setCapability("appium:deviceName", "Pixel 4a");
-        desiredCapabilities.setCapability("appium:app",
-                "/home/serg/Android/2_Auto/02.4/appium-tests/artifacts/app-debug.apk");
+        desiredCapabilities.setCapability("appium:appPackage", "ru.netology.testing.uiautomator");
+        desiredCapabilities.setCapability("appActivity", "ru.netology.testing.uiautomator.MainActivity");
         desiredCapabilities.setCapability("appium:automationName", "uiautomator2");
         desiredCapabilities.setCapability("appium:ensureWebviewsHavePages", true);
         desiredCapabilities.setCapability("appium:nativeWebScreenshot", true);
@@ -46,44 +45,40 @@ public class AppiumTest {
 
     @Test
     public void testNotChangeText() {
-        MobileElement el1 = (MobileElement) driver.findElement(By.id("ru.netology.testing.uiautomator:id/userInput"));
+        MainScreen mainScreen = new MainScreen(driver);
+        MobileElement el1 = mainScreen.userInput;
         el1.isDisplayed();
         el1.click();
         el1.sendKeys(textToSet);
 
-        MobileElement el2 = (MobileElement) driver.findElement(By.id("ru.netology.testing.uiautomator:id/buttonChange"));
+        MobileElement el2 = mainScreen.buttonChange;
         el2.isDisplayed();
         el2.click();
 
-        MobileElement el3 = (MobileElement) driver.findElement(By.id("ru.netology.testing.uiautomator:id/userInput"));
-        el3.isDisplayed();
-        el3.click();
-        el3.sendKeys("   ");
+        el1.isDisplayed();
+        el1.click();
+        el1.sendKeys("   ");
 
-        MobileElement el4 = (MobileElement) driver.findElement(By.id("ru.netology.testing.uiautomator:id/buttonChange"));
-        el4.isDisplayed();
-        el4.click();
+        el2.isDisplayed();
+        el2.click();
 
-        MobileElement el5 = (MobileElement) driver.findElement(By.id("ru.netology.testing.uiautomator:id/textToBeChanged"));
-        el5.isDisplayed();
-        Assertions.assertEquals(textToSet, el5.getText());
+        Assertions.assertEquals(textToSet, mainScreen.textToBeChanged.getText());
 
     }
 
     @Test
     public void testOpenText() {
-        MobileElement el1 = (MobileElement) driver.findElement(By.id("ru.netology.testing.uiautomator:id/userInput"));
+        MainScreen mainScreen = new MainScreen(driver);
+        MobileElement el1 = mainScreen.userInput;
         el1.isDisplayed();
         el1.click();
         el1.sendKeys(textToSet);
 
-        MobileElement el2 = (MobileElement) driver.findElement(By.id("ru.netology.testing.uiautomator:id/buttonActivity"));
+        MobileElement el2 = mainScreen.buttonActivity;
         el2.isDisplayed();
         el2.click();
 
-        MobileElement el3 = (MobileElement) driver.findElement(By.id("ru.netology.testing.uiautomator:id/text"));
-        el3.isDisplayed();
-        Assertions.assertEquals(textToSet, el3.getText());
+        Assertions.assertEquals(textToSet, mainScreen.text.getText());
     }
 
     @AfterEach

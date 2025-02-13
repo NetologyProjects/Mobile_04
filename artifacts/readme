@@ -1,3 +1,11 @@
+{
+  "platformName": "Android",
+  "appium:deviceName": "Pixel 4a",
+  "appium:appPackage": "ru.netology.testing.uiautomator",
+  "appium:appActivity": "ru.netology.testing.uiautomator.MainActivity",
+  "appium:automationName": "uiautomator2"
+}
+
 
 {
   "platformName": "Android",
