@@ -1,0 +1,13 @@
+
+{
+  "platformName": "Android",
+  "appium:deviceName": "Pixel 4a",
+  "appium:app": "/home/serg/Android/2_Auto/02.4/appium-tests/artifacts/app-debug.apk",
+  "appium:automationName": "uiautomator2"
+}
+
+---запуск appium-сервер
+appium
+
+---запуск Appium-Inspector
+./Appium-Inspector-2024.12.1-linux-x86_64.AppImage
